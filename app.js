@@ -3,8 +3,14 @@ const app =  express();
 const routes = require('./routes');
 const erroHandlers = require('./middleware/errorhandlers');
 const log = require('./middleware/log');
+const partials = require('express-partials');
 
+app.set('view engine', 'ejs');
+app.set('view options', { defaultLayout: 'layout' });
+
+app.use(partials());
 app.use(log.logger);
+app.use(express.static(__dirname + '/static'));
 
 app.get('/', routes.index);
 app.get('/login', routes.login);

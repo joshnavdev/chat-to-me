@@ -1,9 +1,9 @@
 const index = (req, res) => {
-  res.send('Index');
+  res.render('index', { title: 'Index' });
 };
 
 const login = (req, res) => {
-  res.send('Login');
+  res.render('login', { title: 'Login' });
 };
 
 const loginProcess = (req, res) => {
@@ -11,7 +11,7 @@ const loginProcess = (req, res) => {
 };
 
 const chat = (req, res) => {
-  res.send('Chat');
+  res.render('chat', { title: 'Chat' });
 }
 
 module.exports.index = index;
