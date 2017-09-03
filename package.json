@@ -1,0 +1,20 @@
+{
+  "name": "chat-to-me",
+  "version": "0.0.1",
+  "description": "This proyect was created using express, EJS and Socket.io as a demo project to expose",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "author": "Joshua Navarro",
+  "license": "ISC",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-redis": "^3.3.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-partial": "^0.1.0",
+    "redis": "^2.8.0"
+  }
+}
