@@ -8,10 +8,11 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const bodyParser = require('body-parser');
+const csrf = require('csurf');
+const util = require('./middleware/utilities');
 
 app.set('view engine', 'ejs');
 app.set('view options', { defaultLayout: 'layout' });
-
 app.use(partials());
 app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
@@ -24,6 +25,8 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(csrf());
+app.use(util.csrf);
 
 app.get('/', routes.index);
 app.get('/login', routes.login);
@@ -38,3 +41,4 @@ app.use(erroHandlers.notFound);
 
 app.listen(3000);
 console.log('App server running on port 3000');
+
