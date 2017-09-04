@@ -9,7 +9,8 @@ const login = (req, res) => {
 };
 
 const loginProcess = (req, res) => {
-  res.redirect('/');
+  console.log(req.body);
+  res.send(req.body.username + ' ' + req.body.password);
 };
 
 const chat = (req, res) => {

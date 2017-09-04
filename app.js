@@ -7,6 +7,7 @@ const partials = require('express-partials');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
 app.set('view options', { defaultLayout: 'layout' });
@@ -21,6 +22,8 @@ app.use(session({
   resave: true,
   store: new RedisStore({ url: 'redis://localhost' })
 }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', routes.index);
 app.get('/login', routes.login);
