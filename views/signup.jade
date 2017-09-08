@@ -1,0 +1,90 @@
+extends lay
+
+block title
+  title Chattome - Sing Up
+
+block css
+  style.
+    body {
+      background: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .column {
+      max-width: 450px;
+    }
+
+block content
+  div.ui.middle.aligned.center.aligned.grid
+    div.column
+      h2.ui.teal.imagen.header
+        img.image(src="css/logo.png", alt="logo")
+        div.content Ingrese sus datos:
+      form.ui.large.form(method="post")
+        input(type="hidden", name="_csrf", value="#{token}")
+        div.ui.stacked.segment
+          if message != undefined
+            div.ui.negative.message #{message}
+          div.field
+            div.ui.left.icon.input
+              input(type="text", name="fullname", placeholder="Nombre Completo" value="#{fields === undefined ? '' : fields.fullname}")
+              i.bullseye.icon
+          div.field
+            div.ui.left.icon.input
+              input(type="text", name="email", placeholder="Correo Electrónico" value="#{fields === undefined ? '' : fields.email}")
+              i.bullseye.icon
+          div.field
+            div.ui.left.icon.input
+              input(type="password", name="password", placeholder="Contraseña")
+              i.bullseye.icon
+          div.field
+            div.ui.left.icon.input
+              input(type="password", name="confirmPassword", placeholder="Confirmar Contraseña")
+              i.bullseye.icon
+          div.ui.error.message
+          input.ui.fluid.large.teal.submit.button(type="submit", value="Registrar")
+          br
+          a.ui.fluid.large.teal.button(href="/login") Cancelar
+
+block scripts
+  script.
+    $('.form').form({
+      on: 'blur',
+      fields: {
+        fullname: {
+          identifier: 'fullname',
+          rules: [{
+            type: 'empty',
+            prompt: 'Ingrese sus nombres y apellidos'
+          }]
+        },
+        email: {
+          identifier: 'email',
+          rules: [{
+            type: 'empty',
+            prompt: 'Ingrese su correo electronico'
+          }, {
+            type: 'email',
+            prompt: 'El correo debe ser valido'
+          }]
+        },
+        password: {
+          indetifier: 'password',
+          rules: [{
+            type: 'empty',
+            prompt: 'Ingrese una constraseña'
+          }]
+        },
+        confirmPassword: {
+          indetifier: 'confirmPassword',
+          rules: [{
+            type: 'empty',
+            prompt: 'Confirme su contraseña'
+          }, {
+            type: 'match[password]',
+            prompt: 'Las contraseñas no concuerdan'
+          }]
+        }
+      }
+    })

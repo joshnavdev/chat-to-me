@@ -1,0 +1,65 @@
+extends lay
+
+block title
+  title Login
+
+block css
+  style.
+    body {
+      background: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .column {
+      max-width: 450px;
+    }
+block content
+  div.ui.middle.aligned.center.aligned.grid
+    div.column 
+      h2.ui.teal.imagen.header
+        img.image(src="css/logo.png", alt="logo")
+        div.content Ingrese a su cuenta:
+      form.ui.large.form(method="post")
+        input(type="hidden", name="_csrf", value="#{token}")
+        div.ui.stacked.segment
+          if message != undefined
+            div.ui.negative.message #{message}
+          div.field
+            div.ui.left.icon.input
+              input(type="text", name="email", placeholder="Correo")
+              i.mail.icon
+          div.field
+            div.ui.left.icon.input
+              input(type="password", name="password", placeholder="Contraseña")
+              i.lock.icon
+          input.ui.fluid.large.teal.submit.button(type="submit", value="Entrar")
+          div.ui.error.message
+        div.ui.message Eres nuevo? 
+          a(href="/signup") Regístraste
+
+block scripts
+  script.
+    $('.form')
+      .form({
+        on: 'blur',
+        fields: {
+          email: {
+            identifier: 'email',
+            rules: [{
+              type: 'empty',
+              prompt: 'Ingrese un correo'
+            }, {
+              type: 'email',
+              prompt: 'El correo debe ser valido'
+            }]
+          },
+          password: {
+            identifier: 'password',
+            rules: [{
+              type: 'empty',
+              prompt: 'Ingrese una contrasña'
+            }]
+          }
+        }
+      });

@@ -1,14 +1,14 @@
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
+  <div class="col-sm-6 col-sm-offset-3">
     <div class="row">
       <div class="col-sm-12">
-        <form method="post">
+        <form class="form" method="post">
           <% if (message.length > 0) { %>
             <div class="alert alert-danger"><%= message %></div>
           <% } %>
           <input type="hidden" name="_csrf" value="<%= token %>">
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Username or email</label>
             <input
               type="text" 
               class="form-control"
@@ -47,3 +47,24 @@
     </div>
   </div>
 </div>
+<script src="/js/semantic.min.js"></script>
+<script>
+  console.log('asdasd',$(".form"));
+  $(".form").form({
+    on: 'blur',
+    fields: {
+      username: {
+        identifier: 'username',
+        rules: [{
+          type: 'empty',
+          prompt: 'Ingrese usuario'
+        }]
+      }
+    }
+  })
+  // $(".form").validate({
+  //   username: {
+  //     required: true,
+  //   }
+  // })
+</script>

@@ -1,0 +1,39 @@
+<%
+  if(!errors) {
+    errors = [];
+  }
+  if(!dataTemp) {
+    dataTemp = {};
+  }
+  const errorObject = {};
+  errors.forEach(error => {
+    errorObject[error.param] = 'has-error'
+  });
+%>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="row">
+      <div class="col-sm-12">
+        <form method="post">
+          <input type="hidden" name="_csrf" value="<%= token %>">
+          <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+          <% } %>
+          <div class="form-group <%= errorObject['fullname'] %>">
+            <label for="fullname">Full name</label>
+            <input type="text" class="form-control" id="fullname" placeholder="full name" name="fullname" value="<%= dataTemp['fullname'] %>">
+          </div>
+          <div class="form-group <%= errorObject['email'] %> ">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="email" name="email" value="<%= dataTemp['email'] %>">
+          </div>
+          <div class="form-group <%= errorObject['password'] %>">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password" name="password" value="<%= dataTemp['password'] %>">
+          </div>
+          <button class="btn btn-primary btn-block">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
